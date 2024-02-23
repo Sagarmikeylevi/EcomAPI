@@ -6,6 +6,7 @@ router.get("/", (req, res) => {
 });
 
 router.use("/user", require("./user"));
+router.use("/category", require("./category"));
 
 console.log("Routes are running fine");
 module.exports = router;

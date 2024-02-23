@@ -45,7 +45,8 @@ module.exports.createSession = async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.json({ token });
+    console.log("Toekn", token);
+    res.status(200).json({ token });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
