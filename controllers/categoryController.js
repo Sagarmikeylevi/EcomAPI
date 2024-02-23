@@ -37,3 +37,14 @@ module.exports.createCategory = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+module.exports.showCategories = async (req, res) => {
+  try {
+    const categories = await Category.find();
+
+    res.status(200).json(categories);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
