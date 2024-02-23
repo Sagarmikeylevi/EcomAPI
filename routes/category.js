@@ -11,4 +11,6 @@ router.post("/create", verifyToken, createCategory);
 // anyone can acess this
 router.get("/allCategories", showCategories);
 
+router.use("/", require("./product"));
+
 module.exports = router;
