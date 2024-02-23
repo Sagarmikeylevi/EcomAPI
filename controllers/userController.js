@@ -15,12 +15,18 @@ module.exports.register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new User({ name, email, password: hashedPassword });
+    const user = new User({
+      name,
+      email,
+      password: hashedPassword,
+      role: "user",
+    });
 
     await user.save();
 
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
@@ -45,9 +51,9 @@ module.exports.createSession = async (req, res) => {
       expiresIn: "1h",
     });
 
-    console.log("Toekn", token);
     res.status(200).json({ token });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
 };

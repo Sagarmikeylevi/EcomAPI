@@ -1,8 +1,19 @@
 const Category = require("../models/Category");
+const User = require("../models/User");
 
 module.exports.createCategory = async (req, res) => {
   try {
     const { name, description } = req.body;
+
+    const user = await User.findById(req.userId);
+
+    console.log(user);
+
+    if (user.role !== "admin") {
+      return res
+        .status(401)
+        .json({ error: "Unauthorized - You are not an admin" });
+    }
 
     const existingCategory = await Category.findOne({ name });
 
